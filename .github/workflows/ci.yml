@@ -22,14 +22,14 @@ jobs:
           working-directory: ../../
           file: ./app.Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simple-django:latest
       - name: Build and push nginx
         uses: docker/build-push-action@v2
         with:
           working-directory: ../../
           file: ./nginx.Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simple-django:latest
   test:
     runs-on: ubuntu-latest
     steps:
