@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  db:
+    image: nouchka/sqlite3
+    ports:
+      - "5000:5000"
+    stdin_open: true
+  web:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    volumes:
+      - static_volume:/usr/src/app/catalog/static/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    volumes:
+      - static_volume:/usr/src/app/catalog/static/
+    ports:
+      - "1337:80"
+    depends_on:
+      - web
+volumes:
+  static_volume:
